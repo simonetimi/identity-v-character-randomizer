@@ -61,9 +61,9 @@ const CharactersSelector = () => {
 
   return (
     <div className="lg:w-[500px] w-11/12 flex flex-col items-center gap-4">
-      <Card>
+      <Card className="bg-white/20 backdrop-blur-lg border-slate-100/20 shadow-md">
         <CardHeader>
-          <CardTitle className="text-center">
+          <CardTitle className="text-center flex flex-col gap-1">
             <p>{selectedCharacter?.name}</p>
             <p>&#34;{selectedCharacter?.nickname}&#34;</p>
           </CardTitle>
