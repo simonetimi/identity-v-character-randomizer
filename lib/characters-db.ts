@@ -133,7 +133,7 @@ export const hunters: Character[] = [
   {
     name: "Ithaqua",
     nickname: "Night Watch",
-    img: "https://static.wikia.nocookie.net/id5/images/4/4d/TheFeaster.png",
+    img: "https://static.wikia.nocookie.net/id5/images/2/24/NightWatch.png",
   },
   {
     name: "Sangria",
