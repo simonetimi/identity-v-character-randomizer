@@ -8,7 +8,9 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  height: 100vh;
+  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  color: #222222;
+  min-height: 100dvh;
 }
 
 @layer base {
@@ -72,7 +74,5 @@ body {
   }
   body {
     @apply bg-background text-foreground;
-    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
-    color: #222222;
   }
 }
