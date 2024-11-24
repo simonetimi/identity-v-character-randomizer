@@ -11,8 +11,14 @@ body {
   background-image: url("/images/bg-parchment.webp");
   background-repeat: no-repeat;
   background-size: cover;
-  color: #222222;
   min-height: 100dvh;
+  color: white;
+}
+
+h1,
+h2,
+p {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 @layer base {
@@ -22,7 +28,7 @@ body {
     --card: 0 0% 100%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 9 83% 43%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
