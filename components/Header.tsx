@@ -17,15 +17,13 @@ const Header = () => {
 
   return (
     <header className="sticky z-10 top-0 p-4 flex items-center border-b border-slate-100/20 h-[10dvh] shadow bg-white/10 backdrop-blur-lg">
-      <h1 className="lg:text-2xl text-lg">
-        <span className="font-bold">Identity V</span>{" "}
-        <span className="underline-offset-8 underline">
-          Character Randomizer
-        </span>
-      </h1>
+      <div className="flex flex-col">
+        <h1 className="lg:text-2xl text-lg font-bold">Identity V</h1>
+        <h2 className="underline-offset-4 underline">Character Randomizer</h2>
+      </div>
       <Button className="ml-auto" asChild>
         <Link href={linkUrl}>
-          {pathname === "/" ? "See recent characters" : "Back to randomizer"}
+          {pathname === "/" ? "Recent characters" : "Back"}
         </Link>
       </Button>
     </header>
