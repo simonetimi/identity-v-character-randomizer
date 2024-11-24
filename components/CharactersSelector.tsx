@@ -7,6 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Character, hunters, survivors } from "@/lib/characters-db";
 import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
 
+let importedHunters = hunters;
+let importedSurvivors = survivors;
+
 const CharactersSelector = () => {
   const [category, setCategory] = useState<string | null>(null);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
@@ -20,12 +23,41 @@ const CharactersSelector = () => {
     setCategory(category);
 
     setTimeout(() => {
-      const newCharacters = category === "survivors" ? survivors : hunters;
+      let newCharacters =
+        category === "survivors" ? importedSurvivors : importedHunters;
 
+      // if no characters left, reset characters
+      if (newCharacters.length === 0) {
+        if (category === "survivors") {
+          importedSurvivors = survivors;
+          newCharacters = importedSurvivors;
+        } else {
+          importedHunters = hunters;
+          newCharacters = importedHunters;
+        }
+      }
+
+      // select random character
       const randomIndex = Math.floor(Math.random() * newCharacters.length);
-      setSelectedCharacter(newCharacters[randomIndex] || null);
 
+      const characterName = newCharacters[randomIndex].name;
+
+      // save to state and history
+      setSelectedCharacter(newCharacters[randomIndex] || null);
       saveCharacter(newCharacters[randomIndex]);
+
+      // updates current array to avoid duplicate calls
+      if (category === "survivors") {
+        importedSurvivors = importedSurvivors.filter(
+          (character) => character.name !== characterName,
+        );
+      } else {
+        importedHunters = importedHunters.filter(
+          (character) => character.name !== characterName,
+        );
+      }
+      console.log(importedHunters);
+      console.log(importedSurvivors);
     }, 1000);
   };
 

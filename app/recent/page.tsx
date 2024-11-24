@@ -13,7 +13,6 @@ export default function Recent() {
 
   useEffect(() => {
     setCharacters(retrieveCharacters());
-    console.log(retrieveCharacters());
   }, [retrieveCharacters]);
 
   if (characters.length === 0) {
