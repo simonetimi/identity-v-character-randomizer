@@ -56,8 +56,6 @@ const CharactersSelector = () => {
           (character) => character.name !== characterName,
         );
       }
-      console.log(importedHunters);
-      console.log(importedSurvivors);
     }, 1000);
   };
 
