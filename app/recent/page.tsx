@@ -31,7 +31,7 @@ export default function Recent() {
         {characters.map((character, idx) => (
           <Card
             key={idx}
-            className="bg-white/20 backdrop-blur-lg border-slate-100/20 shadow-md"
+            className="bg-white/20 backdrop-blur-lg border-slate-100/20 shadow-md hover:scale-105 transition-transform duration-300"
           >
             <CardHeader>
               <CardTitle className="text-center flex flex-col gap-1">

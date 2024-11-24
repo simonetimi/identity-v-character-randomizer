@@ -95,8 +95,8 @@ const CharactersSelector = () => {
     );
 
   return (
-    <div className="lg:w-[500px] w-11/12 flex flex-col items-center gap-4">
-      <Card className="bg-white/20 backdrop-blur-lg border-slate-100/20 shadow-md">
+    <div className="lg:w-[500px] w-11/12 flex flex-col items-center gap-8">
+      <Card className="bg-white/20 backdrop-blur-lg border-slate-100/20 shadow-md hover:scale-105 transition-transform duration-300">
         <CardHeader>
           <CardTitle className="text-center flex flex-col gap-1">
             <p className="card-name">{selectedCharacter?.name}</p>
