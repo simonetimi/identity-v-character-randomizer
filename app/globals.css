@@ -8,7 +8,9 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  background-image: url("/images/bg-parchment.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #222222;
   min-height: 100dvh;
 }
