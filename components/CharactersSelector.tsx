@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dices } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Character, hunters, survivors } from "@/lib/characters-db";
+import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
 
 const CharactersSelector = () => {
   const [category, setCategory] = useState<string | null>(null);
@@ -12,6 +13,8 @@ const CharactersSelector = () => {
     null,
   );
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  const { saveCharacter } = useCharactersPersistence();
 
   const onSelectCategory = (category: string) => {
     setCategory(category);
@@ -21,6 +24,8 @@ const CharactersSelector = () => {
 
       const randomIndex = Math.floor(Math.random() * newCharacters.length);
       setSelectedCharacter(newCharacters[randomIndex] || null);
+
+      saveCharacter(newCharacters[randomIndex]);
     }, 1000);
   };
 
