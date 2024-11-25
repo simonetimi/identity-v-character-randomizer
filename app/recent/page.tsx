@@ -50,7 +50,10 @@ export default function Recent() {
         ))}
       </div>
       {isDeleting ? (
-        <Button onClick={onConfirmDelete} variant="destructive">
+        <Button
+          onClick={onConfirmDelete}
+          className="bg-black hover:bg-black/80"
+        >
           Are you sure?
         </Button>
       ) : (
