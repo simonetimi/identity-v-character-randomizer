@@ -6,7 +6,6 @@ import { Dices } from "lucide-react";
 import { Character, hunters, survivors } from "@/lib/characters-db";
 import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
 import { CharacterDialog } from "@/components/CharacterDialog";
-import characterCard from "@/components/ui/CharacterCard";
 
 let importedHunters = hunters;
 let importedSurvivors = survivors;
@@ -14,7 +13,7 @@ let importedSurvivors = survivors;
 const CharactersSelector = () => {
   const [category, setCategory] = useState<string | null>(null);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
-    null,
+    null
   );
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -50,11 +49,11 @@ const CharactersSelector = () => {
       // updates current array to avoid duplicate calls
       if (category === "survivors") {
         importedSurvivors = importedSurvivors.filter(
-          (character) => character.name !== characterName,
+          (character) => character.name !== characterName
         );
       } else {
         importedHunters = importedHunters.filter(
-          (character) => character.name !== characterName,
+          (character) => character.name !== characterName
         );
       }
     }, 1000);

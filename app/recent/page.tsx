@@ -3,15 +3,8 @@
 import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
 import React, { useEffect, useState } from "react";
 import { Character } from "@/lib/characters-db";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import CharacterCard from "@/components/ui/CharacterCard";
+
 import { CharacterDialog } from "@/components/CharacterDialog";
 
 export default function Recent() {
