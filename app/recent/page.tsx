@@ -2,7 +2,7 @@
 
 import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
 import React, { useEffect, useState } from "react";
-import { Character } from "@/lib/characters-db";
+import { Character } from "@/db/characters";
 import { Button } from "@/components/ui/button";
 
 import { CharacterDialog } from "@/components/CharacterDialog";

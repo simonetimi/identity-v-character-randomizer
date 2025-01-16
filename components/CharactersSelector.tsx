@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dices } from "lucide-react";
-import { Character, hunters, survivors } from "@/lib/characters-db";
+import { Character, hunters, survivors } from "@/db/characters";
 import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
 import { CharacterDialog } from "@/components/CharacterDialog";
 

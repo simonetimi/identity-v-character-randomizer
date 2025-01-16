@@ -4,7 +4,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Character } from "@/lib/characters-db";
+import { Character } from "@/db/characters";
 import CharacterCard from "@/components/ui/CharacterCard";
 import React from "react";
 

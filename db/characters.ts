@@ -393,4 +393,9 @@ export const survivors: Character[] = [
     nickname: "Knight",
     img: "https://static.wikia.nocookie.net/id5/images/6/6b/Knight.png",
   },
+  {
+    name: "Wendy Foote",
+    nickname: "Meteorologist",
+    img: "https://static.wikia.nocookie.net/id5/images/8/8e/Meteorologist.png/",
+  },
 ];
