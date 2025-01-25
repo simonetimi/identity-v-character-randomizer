@@ -2,6 +2,7 @@ export interface Character {
   name: string;
   nickname: string;
   img: string;
+  duo?: boolean;
 }
 
 export const hunters: Character[] = [
@@ -9,41 +10,49 @@ export const hunters: Character[] = [
     name: "Leo Beck",
     nickname: "Hell Ember",
     img: "https://static.wikia.nocookie.net/id5/images/e/eb/HellEmber.png",
+    duo: true,
   },
   {
     name: "Joker",
     nickname: "Smiley Face",
     img: "https://static.wikia.nocookie.net/id5/images/6/66/SmileyFace.png",
+    duo: true,
   },
   {
     name: "Bane Perez",
     nickname: "Gamekeeper",
     img: "https://static.wikia.nocookie.net/id5/images/b/b3/Gamekeeper.png",
+    duo: true,
   },
   {
     name: "Jack",
     nickname: "The Ripper",
     img: "https://static.wikia.nocookie.net/id5/images/8/82/TheRipper.png",
+    duo: true,
   },
   {
     name: "Violetta",
     nickname: "Soul Weaver",
     img: "https://static.wikia.nocookie.net/id5/images/b/b2/SoulWeaver.png",
+    duo: true,
   },
   {
     name: "Michiko",
     nickname: "Geisha",
     img: "https://static.wikia.nocookie.net/id5/images/a/ab/Geisha.png",
+    duo: true,
   },
   {
     name: "Hastur",
     nickname: "The Feaster",
     img: "https://static.wikia.nocookie.net/id5/images/4/4d/TheFeaster.png",
+    duo: true,
   },
   {
     name: "Xie Bi'an & Fan Wujiu",
     nickname: "Wu Chang",
     img: "https://static.wikia.nocookie.net/id5/images/4/4c/WuChang.png",
+    duo: true,
   },
   {
     name: "Joseph Desaulnier",
@@ -54,6 +63,7 @@ export const hunters: Character[] = [
     name: "Burke Lapadura",
     nickname: "Mad Eyes",
     img: "https://static.wikia.nocookie.net/id5/images/0/0e/MadEyes.png",
+    duo: true,
   },
   {
     name: "Yidhra",
@@ -64,36 +74,43 @@ export const hunters: Character[] = [
     name: "Robbie",
     nickname: "Axe Boy",
     img: "https://static.wikia.nocookie.net/id5/images/3/32/AxeBoy.png",
+    duo: true,
   },
   {
     name: "Luchino Diruse",
     nickname: "Evil Reptilian",
     img: "https://static.wikia.nocookie.net/id5/images/2/24/EvilReptilian.png",
+    duo: true,
   },
   {
     name: "Mary",
     nickname: "Bloody Queen",
     img: "https://static.wikia.nocookie.net/id5/images/c/c3/BloodyQueen.png",
+    duo: true,
   },
   {
     name: "Bonbon",
     nickname: "Guard 26",
     img: "https://static.wikia.nocookie.net/id5/images/8/89/Guard26.png",
+    duo: true,
   },
   {
     name: "Ann",
     nickname: "Disciple",
     img: "https://static.wikia.nocookie.net/id5/images/b/bd/Disciple.png",
+    duo: true,
   },
   {
     name: "Antonio",
     nickname: "Violinist",
     img: "https://static.wikia.nocookie.net/id5/images/f/f1/Violinist.png",
+    duo: true,
   },
   {
     name: "Galatea Claude",
     nickname: "Sculptor",
     img: "https://static.wikia.nocookie.net/id5/images/5/53/Sculptor.png",
+    duo: true,
   },
   {
     name: "Percy",
@@ -104,21 +121,25 @@ export const hunters: Character[] = [
     name: "The Will Brothers",
     nickname: "The Breaking Wheel",
     img: "https://static.wikia.nocookie.net/id5/images/b/b1/TheBreakingWheel.png",
+    duo: true,
   },
   {
     name: "Grace",
     nickname: "Naiad",
     img: "https://static.wikia.nocookie.net/id5/images/f/fd/Naiad.png",
+    duo: true,
   },
   {
     name: "Philippe",
     nickname: "Wax Artist",
     img: "https://static.wikia.nocookie.net/id5/images/3/38/WaxArtist1.png",
+    duo: true,
   },
   {
     name: "Orpheus",
     nickname: "Nightmare",
     img: "https://static.wikia.nocookie.net/id5/images/8/89/%22Nightmare%22.png",
+    duo: true,
   },
   {
     name: "Keigan Nicholas Keogh",
@@ -134,21 +155,25 @@ export const hunters: Character[] = [
     name: "Ithaqua",
     nickname: "Night Watch",
     img: "https://static.wikia.nocookie.net/id5/images/2/24/NightWatch.png",
+    duo: true,
   },
   {
     name: "Sangria",
     nickname: "Opera Singer",
     img: "https://static.wikia.nocookie.net/id5/images/8/83/OperaSinger.png",
+    duo: true,
   },
   {
     name: "Norton Campbell",
     nickname: "Fool's Gold",
     img: "https://static.wikia.nocookie.net/id5/images/6/6b/FoolsGold.png",
+    duo: true,
   },
   {
     name: "Ivy",
     nickname: "The Shadow",
     img: "https://static.wikia.nocookie.net/id5/images/b/ba/TheShadow.png",
+    duo: true,
   },
   {
     name: "Jeffrey Bonavita",
@@ -159,6 +184,7 @@ export const hunters: Character[] = [
     name: "Mike Morton",
     nickname: "Hullabaloo",
     img: "https://static.wikia.nocookie.net/id5/images/5/5a/Hullabaloo.png",
+    duo: true,
   },
 ];
 

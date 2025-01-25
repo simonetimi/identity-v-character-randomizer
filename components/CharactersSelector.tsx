@@ -6,12 +6,14 @@ import { Dices } from "lucide-react";
 import { Character, hunters, survivors } from "@/db/characters";
 import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
 import { CharacterDialog } from "@/components/CharacterDialog";
+import { Toggle } from "@/components/ui/toggle";
 
 let importedHunters = hunters;
 let importedSurvivors = survivors;
 
 const CharactersSelector = () => {
   const [category, setCategory] = useState<string | null>(null);
+  const [duoMode, setDuoMode] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
     null
   );
@@ -38,22 +40,27 @@ const CharactersSelector = () => {
       }
 
       // select random character
-      const randomIndex = Math.floor(Math.random() * newCharacters.length);
-
-      const characterName = newCharacters[randomIndex].name;
+      let selectedCharacter;
+      do {
+        const randomIndex = Math.floor(Math.random() * newCharacters.length);
+        selectedCharacter = newCharacters[randomIndex];
+        if (category === "hunters" && duoMode && !selectedCharacter.duo) {
+          continue;
+        } else break;
+      } while (true);
 
       // save to state and history
-      setSelectedCharacter(newCharacters[randomIndex] || null);
-      saveCharacter(newCharacters[randomIndex]);
+      setSelectedCharacter(selectedCharacter || null);
+      saveCharacter(selectedCharacter);
 
       // updates current array to avoid duplicate calls
       if (category === "survivors") {
         importedSurvivors = importedSurvivors.filter(
-          (character) => character.name !== characterName
+          (character) => character.name !== selectedCharacter.name
         );
       } else {
         importedHunters = importedHunters.filter(
-          (character) => character.name !== characterName
+          (character) => character.name !== selectedCharacter.name
         );
       }
     }, 1000);
@@ -63,6 +70,10 @@ const CharactersSelector = () => {
     setCategory(null);
     setSelectedCharacter(null);
     setImageLoaded(false);
+  };
+
+  const onSelectDuoMode = () => {
+    setDuoMode(!duoMode);
   };
 
   if (!category)
@@ -75,6 +86,16 @@ const CharactersSelector = () => {
           </Button>
           <Button onClick={() => onSelectCategory("hunters")}>Hunters</Button>
         </section>
+        <Toggle
+          aria-label="Toggle italic"
+          pressed={duoMode}
+          onPressedChange={onSelectDuoMode}
+          className="bg-primary hover:bg-primary/80 hover:text-white data-[state=on]:bg-primary data-[state=on]:text-white mt-4 data-[state=on]:shadow-[0px_0px_10px_4px_rgba(219,22,0,0.9)]
+
+"
+        >
+          Duo Hunters Mode
+        </Toggle>
       </div>
     );
 
