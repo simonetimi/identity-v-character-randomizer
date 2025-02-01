@@ -16,11 +16,11 @@ const Header = () => {
   }
 
   return (
-    <header className="sticky z-10 top-0 p-4 flex items-center border-b border-slate-100/20 h-[12dvh] shadow bg-white/10 backdrop-blur">
+    <header className="sticky z-10 top-0 p-4 flex items-center border-b border-slate-100/20 h-[12dvh] shadow-sm bg-white/10 backdrop-blur-sm">
       <Link href="/">
         <div className="flex flex-col items-center">
           <img src="/images/iv-logo.png" width="150" alt="identity v logo" />
-          <h2 className="text-white font-bold drop-shadow">
+          <h2 className="text-white font-bold drop-shadow-sm">
             Character Randomizer
           </h2>
         </div>

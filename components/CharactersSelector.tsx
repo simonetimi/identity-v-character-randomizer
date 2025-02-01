@@ -102,7 +102,7 @@ const CharactersSelector = () => {
   if (!imageLoaded)
     return (
       <div className=" p-4 lg:w-[500px] w-11/12 flex flex-col gap-2 items-center">
-        <Dices className="animate-bounce drop-shadow" size={40} color="white" />
+        <Dices className="animate-bounce drop-shadow-sm" size={40} color="white" />
         <p className="text-xl">Selecting your {category.slice(0, -1)}...</p>
         {selectedCharacter && (
           <img
