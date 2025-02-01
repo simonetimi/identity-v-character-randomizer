@@ -8,13 +8,6 @@ import Link from "next/link";
 const Header = () => {
   const pathname = usePathname();
 
-  let linkUrl = "";
-  if (pathname === "/") {
-    linkUrl = "/recent";
-  } else if (pathname === "/recent") {
-    linkUrl = "/";
-  }
-
   return (
     <header className="sticky z-10 top-0 p-4 flex items-center border-b border-slate-100/20 h-[12dvh] shadow-sm bg-white/10 backdrop-blur-sm">
       <Link href="/">
@@ -25,11 +18,23 @@ const Header = () => {
           </h2>
         </div>
       </Link>
-      <Button className="ml-auto" asChild>
-        <Link href={linkUrl}>
-          {pathname === "/" ? "Recent characters" : "Go back"}
-        </Link>
-      </Button>
+      <div className="ml-auto gap-2 flex">
+        {pathname === "/" && (
+          <Button asChild>
+            <Link href="/favorites">Favorites</Link>
+          </Button>
+        )}
+        {pathname === "/" && (
+          <Button asChild>
+            <Link href="/recent">Recent characters</Link>
+          </Button>
+        )}
+        {pathname !== "/" && (
+          <Button asChild>
+            <Link href="/">Go Back</Link>
+          </Button>
+        )}
+      </div>
     </header>
   );
 };

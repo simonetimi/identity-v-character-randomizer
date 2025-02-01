@@ -1,12 +1,12 @@
 import { Character } from "@/db/characters";
 import { useCallback } from "react";
 
-export function useCharactersPersistence() {
-  const maxCharacters = 5;
+export function useFavoriteCharactersPersistence() {
+  const maxCharacters = 10;
 
   const saveCharacter = (character: Character) => {
     let characters: Character[] = [];
-    const retrievedCharacters = localStorage.getItem("characters");
+    const retrievedCharacters = localStorage.getItem("favoriteCharacters");
     if (retrievedCharacters) {
       characters = JSON.parse(retrievedCharacters);
     }
@@ -17,16 +17,16 @@ export function useCharactersPersistence() {
       characters.shift();
     }
 
-    localStorage.setItem("characters", JSON.stringify(characters));
+    localStorage.setItem("favoriteCharacters", JSON.stringify(characters));
   };
 
   const retrieveCharacters = useCallback((): Character[] => {
-    const retrievedCharacters = localStorage.getItem("characters");
+    const retrievedCharacters = localStorage.getItem("favoriteCharacters");
     return retrievedCharacters ? JSON.parse(retrievedCharacters) : [];
   }, []);
 
   const deleteCharacters = () => {
-    localStorage.removeItem("characters");
+    localStorage.removeItem("favoriteCharacters");
   };
 
   return { saveCharacter, retrieveCharacters, deleteCharacters };

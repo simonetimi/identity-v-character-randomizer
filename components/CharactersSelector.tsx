@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dices } from "lucide-react";
 import { Character, hunters, survivors } from "@/db/characters";
-import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
+import { useRecentCharactersPersistence } from "@/lib/useRecentCharactersPersistence";
 import { CharacterDialog } from "@/components/CharacterDialog";
 import { Toggle } from "@/components/ui/toggle";
+import { useFavoriteCharactersPersistence } from "@/lib/useFavoriteCharactersPersistence";
 
 const CharactersSelector = () => {
   const [category, setCategory] = useState<string | null>(null);
@@ -18,27 +19,48 @@ const CharactersSelector = () => {
   );
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const { saveCharacter } = useCharactersPersistence();
-
-  useEffect(() => {
-    setImportedSurvivors(survivors);
-    setImportedHunters(hunters);
-  }, []);
+  const { retrieveCharacters } = useFavoriteCharactersPersistence();
+  const { saveCharacter } = useRecentCharactersPersistence();
 
   const onSelectCategory = (category: string) => {
     setCategory(category);
 
     setTimeout(() => {
       let newCharacters =
-        category === "survivors" ? importedSurvivors : importedHunters;
+        category === "survivors"
+          ? [...importedSurvivors]
+          : [...importedHunters];
 
       // if no characters left, reset characters
       if (newCharacters.length === 0) {
+        const favoriteCharacters = retrieveCharacters();
         resetCharacters(category);
         if (category === "survivors") {
-          newCharacters = survivors;
+          // picks the survivors
+          newCharacters = [...survivors];
+          // adds an extra "favorite" char to increase odds
+          favoriteCharacters.forEach((char: Character) => {
+            if (
+              !newCharacters.some(
+                (existingChar) => existingChar.nickname === char.nickname
+              )
+            ) {
+              newCharacters.push(char);
+            }
+          });
         } else {
-          newCharacters = hunters;
+          // picks the hunters
+          newCharacters = [...hunters];
+          // adds an extra "favorite" char to increase odds
+          favoriteCharacters.forEach((char: Character) => {
+            if (
+              !newCharacters.some(
+                (existingChar) => existingChar.nickname === char.nickname
+              )
+            ) {
+              newCharacters.push(char);
+            }
+          });
         }
       }
 
@@ -59,13 +81,13 @@ const CharactersSelector = () => {
       // updates current array to avoid duplicate calls
       if (category === "survivors") {
         setImportedSurvivors(
-          importedSurvivors.filter(
+          newCharacters.filter(
             (character) => character.name !== selectedCharacter.name
           )
         );
       } else {
         setImportedHunters(
-          importedHunters.filter(
+          newCharacters.filter(
             (character) => character.name !== selectedCharacter.name
           )
         );

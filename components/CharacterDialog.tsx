@@ -7,6 +7,7 @@ import {
 import { Character } from "@/db/characters";
 import CharacterCard from "@/components/ui/CharacterCard";
 import React from "react";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 export function CharacterDialog({
   character,
@@ -27,7 +28,10 @@ export function CharacterDialog({
         </div>
       </DialogTrigger>
       <DialogContent className="max-w-fit">
-        <DialogTitle className=" no-text-shadow text flex flex-col gap-2">
+        <DialogDescription className="sr-only">
+          {character?.nickname}
+        </DialogDescription>
+        <DialogTitle className="no-text-shadow text flex flex-col gap-2">
           <p className="card-name">{character?.name}</p>
           <p className="card-name">&#34;{character?.nickname}&#34;</p>
         </DialogTitle>

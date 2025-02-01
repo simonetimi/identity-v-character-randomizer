@@ -1,6 +1,6 @@
 "use client";
 
-import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
+import { useRecentCharactersPersistence } from "@/lib/useRecentCharactersPersistence";
 import React, { useEffect, useState } from "react";
 import { Character } from "@/db/characters";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,8 @@ import { CharacterDialog } from "@/components/CharacterDialog";
 export default function Recent() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
-  const { retrieveCharacters, deleteCharacters } = useCharactersPersistence();
+  const { retrieveCharacters, deleteCharacters } =
+    useRecentCharactersPersistence();
 
   useEffect(() => {
     setCharacters(retrieveCharacters());
