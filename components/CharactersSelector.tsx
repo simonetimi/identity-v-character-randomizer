@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dices } from "lucide-react";
 import { Character, hunters, survivors } from "@/db/characters";
@@ -8,18 +8,22 @@ import { useCharactersPersistence } from "@/lib/useCharactersPersistence";
 import { CharacterDialog } from "@/components/CharacterDialog";
 import { Toggle } from "@/components/ui/toggle";
 
-let importedHunters = hunters;
-let importedSurvivors = survivors;
-
 const CharactersSelector = () => {
   const [category, setCategory] = useState<string | null>(null);
   const [duoMode, setDuoMode] = useState(false);
+  const [importedHunters, setImportedHunters] = useState<Character[]>([]);
+  const [importedSurvivors, setImportedSurvivors] = useState<Character[]>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
     null
   );
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const { saveCharacter } = useCharactersPersistence();
+
+  useEffect(() => {
+    setImportedSurvivors(survivors);
+    setImportedHunters(hunters);
+  }, []);
 
   const onSelectCategory = (category: string) => {
     setCategory(category);
@@ -30,12 +34,11 @@ const CharactersSelector = () => {
 
       // if no characters left, reset characters
       if (newCharacters.length === 0) {
+        resetCharacters(category);
         if (category === "survivors") {
-          importedSurvivors = survivors;
-          newCharacters = importedSurvivors;
+          newCharacters = survivors;
         } else {
-          importedHunters = hunters;
-          newCharacters = importedHunters;
+          newCharacters = hunters;
         }
       }
 
@@ -55,24 +58,38 @@ const CharactersSelector = () => {
 
       // updates current array to avoid duplicate calls
       if (category === "survivors") {
-        importedSurvivors = importedSurvivors.filter(
-          (character) => character.name !== selectedCharacter.name
+        setImportedSurvivors(
+          importedSurvivors.filter(
+            (character) => character.name !== selectedCharacter.name
+          )
         );
       } else {
-        importedHunters = importedHunters.filter(
-          (character) => character.name !== selectedCharacter.name
+        setImportedHunters(
+          importedHunters.filter(
+            (character) => character.name !== selectedCharacter.name
+          )
         );
       }
     }, 1000);
   };
 
-  const onReset = () => {
+  const resetCharacters = (category: string | null = null) => {
+    if (category === "survivors") setImportedSurvivors(survivors);
+    else if (category === "hunters") setImportedHunters(hunters);
+    else {
+      setImportedHunters(hunters);
+      setImportedSurvivors(survivors);
+    }
+  };
+
+  const onBack = () => {
     setCategory(null);
     setSelectedCharacter(null);
     setImageLoaded(false);
   };
 
   const onSelectDuoMode = () => {
+    resetCharacters();
     setDuoMode(!duoMode);
   };
 
@@ -102,7 +119,11 @@ const CharactersSelector = () => {
   if (!imageLoaded)
     return (
       <div className=" p-4 lg:w-[500px] w-11/12 flex flex-col gap-2 items-center">
-        <Dices className="animate-bounce drop-shadow-sm" size={40} color="white" />
+        <Dices
+          className="animate-bounce drop-shadow-sm"
+          size={40}
+          color="white"
+        />
         <p className="text-xl">Selecting your {category.slice(0, -1)}...</p>
         {selectedCharacter && (
           <img
@@ -118,7 +139,7 @@ const CharactersSelector = () => {
   return (
     <div className="lg:w-[500px] w-11/12 flex flex-col items-center gap-8">
       <CharacterDialog character={selectedCharacter} height={300} />
-      <Button onClick={onReset}>Reset</Button>
+      <Button onClick={onBack}>Go back</Button>
     </div>
   );
 };
