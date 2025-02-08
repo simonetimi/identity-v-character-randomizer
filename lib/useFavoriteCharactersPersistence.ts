@@ -4,6 +4,10 @@ import { useCallback } from "react";
 export function useFavoriteCharactersPersistence() {
   const maxCharacters = 10;
 
+  const saveAllCharacters = (characters: Character[]) => {
+    localStorage.setItem("favoriteCharacters", JSON.stringify(characters));
+  };
+
   const saveCharacter = (character: Character) => {
     let characters: Character[] = [];
     const retrievedCharacters = localStorage.getItem("favoriteCharacters");
@@ -29,5 +33,10 @@ export function useFavoriteCharactersPersistence() {
     localStorage.removeItem("favoriteCharacters");
   };
 
-  return { saveCharacter, retrieveCharacters, deleteCharacters };
+  return {
+    saveCharacter,
+    retrieveCharacters,
+    deleteCharacters,
+    saveAllCharacters,
+  };
 }

@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Check, ChevronsUpDown, CircleHelp } from "lucide-react";
+import { Check, ChevronsUpDown, CircleHelp, Trash2 } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -32,8 +32,12 @@ export default function Favorites() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [favoriteCharacters, setFavoriteCharacters] = useState<Character[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
-  const { retrieveCharacters, deleteCharacters, saveCharacter } =
-    useFavoriteCharactersPersistence();
+  const {
+    retrieveCharacters,
+    deleteCharacters,
+    saveCharacter,
+    saveAllCharacters,
+  } = useFavoriteCharactersPersistence();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -87,6 +91,14 @@ export default function Favorites() {
       setCharacters(charsToDisplay);
     }
     setValue("");
+  };
+
+  const onDeleteFavorite = (nickname: string) => {
+    const newCharactersList = favoriteCharacters.filter(
+      (char) => char.nickname !== nickname
+    );
+    setFavoriteCharacters(newCharactersList);
+    saveAllCharacters(newCharactersList);
   };
 
   return (
@@ -152,11 +164,23 @@ export default function Favorites() {
         {favoriteCharacters.length > 0 && (
           <div className="lg:w-[1000px] w-11/12 flex justify-center flex-wrap items-center gap-6">
             {favoriteCharacters.map((character) => (
-              <CharacterDialog
-                character={character}
-                height={200}
+              <div
                 key={character.nickname}
-              />
+                className="flex flex-col gap-4 items-center"
+              >
+                <CharacterDialog
+                  character={character}
+                  height={200}
+                  key={character.nickname}
+                />
+                <Button
+                  variant="destructive"
+                  size="icon"
+                  onClick={() => onDeleteFavorite(character.nickname)}
+                >
+                  <Trash2 />
+                </Button>
+              </div>
             ))}
           </div>
         )}
