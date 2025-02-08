@@ -91,6 +91,7 @@ export default function Favorites() {
 
   return (
     <div className="my-6 flex flex-col items-center gap-10">
+      <h1>You can select up to 10 favorite characters</h1>
       <div className="flex">
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
@@ -148,9 +149,7 @@ export default function Favorites() {
         </TooltipProvider>
       </div>
       <div className="my-6 flex flex-col items-center gap-10">
-        {favoriteCharacters.length === 0 ? (
-          <p>No character added to favorites yet.</p>
-        ) : (
+        {favoriteCharacters.length > 0 && (
           <div className="lg:w-[1000px] w-11/12 flex justify-center flex-wrap items-center gap-6">
             {favoriteCharacters.map((character) => (
               <CharacterDialog
