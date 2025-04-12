@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dices } from "lucide-react";
-import { Character, hunters, survivors } from "@/db/characters";
+import { Character } from "@/db/characters";
 import { useRecentCharactersPersistence } from "@/lib/useRecentCharactersPersistence";
 import { CharacterDialog } from "@/components/CharacterDialog";
 import { Toggle } from "@/components/ui/toggle";
 import { useFavoriteCharactersPersistence } from "@/lib/useFavoriteCharactersPersistence";
+import { getCharactersFromBlobStorage } from "@/lib/blobStorage";
 
 const CharactersSelector = () => {
   const [category, setCategory] = useState<string | null>(null);
@@ -15,17 +16,17 @@ const CharactersSelector = () => {
   const [importedHunters, setImportedHunters] = useState<Character[]>([]);
   const [importedSurvivors, setImportedSurvivors] = useState<Character[]>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
-    null
+    null,
   );
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const { retrieveCharacters } = useFavoriteCharactersPersistence();
   const { saveCharacter } = useRecentCharactersPersistence();
 
-  const onSelectCategory = (category: string) => {
+  const onSelectCategory = async (category: string) => {
     setCategory(category);
 
-    setTimeout(() => {
+    setTimeout(async () => {
       let newCharacters =
         category === "survivors"
           ? [...importedSurvivors]
@@ -37,25 +38,25 @@ const CharactersSelector = () => {
         resetCharacters(category);
         if (category === "survivors") {
           // picks the survivors
-          newCharacters = [...survivors];
+          newCharacters = [...(await getCharactersFromBlobStorage(category))];
           // adds an extra "favorite" char to increase odds
           favoriteCharacters.forEach((char: Character) => {
             if (
               !newCharacters.some(
-                (existingChar) => existingChar.nickname === char.nickname
+                (existingChar) => existingChar.nickname === char.nickname,
               )
             ) {
               newCharacters.push(char);
             }
           });
-        } else {
+        } else if (category === "hunters") {
           // picks the hunters
-          newCharacters = [...hunters];
+          newCharacters = [...(await getCharactersFromBlobStorage(category))];
           // adds an extra "favorite" char to increase odds
           favoriteCharacters.forEach((char: Character) => {
             if (
               !newCharacters.some(
-                (existingChar) => existingChar.nickname === char.nickname
+                (existingChar) => existingChar.nickname === char.nickname,
               )
             ) {
               newCharacters.push(char);
@@ -82,25 +83,27 @@ const CharactersSelector = () => {
       if (category === "survivors") {
         setImportedSurvivors(
           newCharacters.filter(
-            (character) => character.name !== selectedCharacter.name
-          )
+            (character) => character.name !== selectedCharacter.name,
+          ),
         );
       } else {
         setImportedHunters(
           newCharacters.filter(
-            (character) => character.name !== selectedCharacter.name
-          )
+            (character) => character.name !== selectedCharacter.name,
+          ),
         );
       }
     }, 1000);
   };
 
-  const resetCharacters = (category: string | null = null) => {
-    if (category === "survivors") setImportedSurvivors(survivors);
-    else if (category === "hunters") setImportedHunters(hunters);
+  const resetCharacters = async (category: string | null = null) => {
+    if (category === "survivors")
+      setImportedSurvivors(await getCharactersFromBlobStorage(category));
+    else if (category === "hunters")
+      setImportedHunters(await getCharactersFromBlobStorage(category));
     else {
-      setImportedHunters(hunters);
-      setImportedSurvivors(survivors);
+      setImportedHunters(await getCharactersFromBlobStorage("hunters"));
+      setImportedSurvivors(await getCharactersFromBlobStorage("survivors"));
     }
   };
 
@@ -110,8 +113,8 @@ const CharactersSelector = () => {
     setImageLoaded(false);
   };
 
-  const onSelectDuoMode = () => {
-    resetCharacters();
+  const onSelectDuoMode = async () => {
+    await resetCharacters();
     setDuoMode(!duoMode);
   };
 
