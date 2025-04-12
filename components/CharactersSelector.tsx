@@ -40,7 +40,7 @@ const CharactersSelector = ({
       // if no characters left, reset characters
       if (newCharacters.length === 0) {
         const favoriteCharacters = retrieveCharacters();
-        resetCharacters(category);
+        await resetCharacters(category);
         if (category === "survivors") {
           // picks the survivors
           newCharacters = [...survivors];
