@@ -1,5 +1,5 @@
 import { getDownloadUrl } from "@vercel/blob";
-import { Character } from "@/db/characters";
+import { Character } from "@/models/characters";
 
 export const getCharactersFromBlobStorage = async (
   category: "hunters" | "survivors",

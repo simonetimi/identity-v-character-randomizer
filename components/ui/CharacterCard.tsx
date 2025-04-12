@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Character } from "@/db/characters";
+import { Character } from "@/models/characters";
 
 const CharacterCard = ({
   character,

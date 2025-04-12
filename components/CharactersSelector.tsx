@@ -3,14 +3,19 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dices } from "lucide-react";
-import { Character } from "@/db/characters";
+import { Character } from "@/models/characters";
 import { useRecentCharactersPersistence } from "@/lib/useRecentCharactersPersistence";
 import { CharacterDialog } from "@/components/CharacterDialog";
 import { Toggle } from "@/components/ui/toggle";
 import { useFavoriteCharactersPersistence } from "@/lib/useFavoriteCharactersPersistence";
-import { getCharactersFromBlobStorage } from "@/lib/blobStorage";
 
-const CharactersSelector = () => {
+const CharactersSelector = ({
+  hunters,
+  survivors,
+}: {
+  hunters: Character[];
+  survivors: Character[];
+}) => {
   const [category, setCategory] = useState<string | null>(null);
   const [duoMode, setDuoMode] = useState(false);
   const [importedHunters, setImportedHunters] = useState<Character[]>([]);
@@ -38,7 +43,7 @@ const CharactersSelector = () => {
         resetCharacters(category);
         if (category === "survivors") {
           // picks the survivors
-          newCharacters = [...(await getCharactersFromBlobStorage(category))];
+          newCharacters = [...survivors];
           // adds an extra "favorite" char to increase odds
           favoriteCharacters.forEach((char: Character) => {
             if (
@@ -51,7 +56,7 @@ const CharactersSelector = () => {
           });
         } else if (category === "hunters") {
           // picks the hunters
-          newCharacters = [...(await getCharactersFromBlobStorage(category))];
+          newCharacters = [...hunters];
           // adds an extra "favorite" char to increase odds
           favoriteCharacters.forEach((char: Character) => {
             if (
@@ -97,13 +102,11 @@ const CharactersSelector = () => {
   };
 
   const resetCharacters = async (category: string | null = null) => {
-    if (category === "survivors")
-      setImportedSurvivors(await getCharactersFromBlobStorage(category));
-    else if (category === "hunters")
-      setImportedHunters(await getCharactersFromBlobStorage(category));
+    if (category === "survivors") setImportedSurvivors(survivors);
+    else if (category === "hunters") setImportedHunters(hunters);
     else {
-      setImportedHunters(await getCharactersFromBlobStorage("hunters"));
-      setImportedSurvivors(await getCharactersFromBlobStorage("survivors"));
+      setImportedHunters(hunters);
+      setImportedSurvivors(survivors);
     }
   };
 

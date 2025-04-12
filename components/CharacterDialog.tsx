@@ -4,7 +4,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Character } from "@/db/characters";
+import { Character } from "@/models/characters";
 import CharacterCard from "@/components/ui/CharacterCard";
 import React from "react";
 import { DialogDescription } from "@radix-ui/react-dialog";

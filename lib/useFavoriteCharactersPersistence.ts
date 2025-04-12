@@ -1,4 +1,4 @@
-import { Character } from "@/db/characters";
+import { Character } from "@/models/characters";
 import { useCallback } from "react";
 
 export function useFavoriteCharactersPersistence() {

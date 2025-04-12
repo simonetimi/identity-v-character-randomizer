@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Character, hunters, survivors } from "@/db/characters";
+import { Character, hunters, survivors } from "@/models/characters";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -54,8 +54,8 @@ export default function Favorites() {
     const favoriteCharNames = favorites.map((char) => char.nickname);
     setCharacters(
       fullListOfChars.filter(
-        (char) => !favoriteCharNames.includes(char.nickname)
-      )
+        (char) => !favoriteCharNames.includes(char.nickname),
+      ),
     );
   }, [retrieveCharacters]);
 
@@ -73,7 +73,7 @@ export default function Favorites() {
 
     // updates favorite characters
     const currentChar = characters.find(
-      (char: Character) => char.nickname === currentValue
+      (char: Character) => char.nickname === currentValue,
     );
     if (currentChar) {
       saveCharacter(currentChar);
@@ -86,7 +86,7 @@ export default function Favorites() {
       const favoriteCharNames = favorites.map((char) => char.nickname);
       const fullListOfChars = [...hunters, ...survivors];
       const charsToDisplay = fullListOfChars.filter(
-        (char) => !favoriteCharNames.includes(char.nickname)
+        (char) => !favoriteCharNames.includes(char.nickname),
       );
       setCharacters(charsToDisplay);
     }
@@ -95,7 +95,7 @@ export default function Favorites() {
 
   const onDeleteFavorite = (nickname: string) => {
     const newCharactersList = favoriteCharacters.filter(
-      (char) => char.nickname !== nickname
+      (char) => char.nickname !== nickname,
     );
     setFavoriteCharacters(newCharactersList);
     saveAllCharacters(newCharactersList);
@@ -137,7 +137,9 @@ export default function Favorites() {
                       <Check
                         className={cn(
                           "ml-auto",
-                          value === character.name ? "opacity-100" : "opacity-0"
+                          value === character.name
+                            ? "opacity-100"
+                            : "opacity-0",
                         )}
                       />
                     </CommandItem>
