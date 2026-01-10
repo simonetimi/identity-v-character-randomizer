@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     .insert({ name, nickname, img, duo });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 5000 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
   return NextResponse.json(
