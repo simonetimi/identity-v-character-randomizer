@@ -21,9 +21,9 @@
     "cmdk": "^1.0.0",
     "embla-carousel-react": "^8.5.1",
     "lucide-react": "^0.487.0",
-    "next": "16.1.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "server-only": "^0.0.1",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7"
