@@ -3,7 +3,7 @@ import { db } from "@/db/supabase";
 
 export async function GET(req: NextRequest) {
   const apiSecret = process.env.API_SECRET;
-  if (req.nextUrl?.searchParams.get("secret") !== apiSecret) {
+  if (req.headers.get("api-secret") !== apiSecret) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
